@@ -19,13 +19,16 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from store import views
+from members import views
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('store.urls',namespace='sotre'))
+    path('',include('store.urls',namespace='sotre')),
     
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    #path('register/',views.register, name='register'),
+    
+   
+    ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 #if settings.DEBUG:
     #urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

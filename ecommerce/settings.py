@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'ecommerce',
     'store',
     'templates',
+    'members',
+    #register.apps.MainConfig,
 ]
 
 MIDDLEWARE = [
