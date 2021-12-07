@@ -28,8 +28,8 @@
         <div class="container">
     <div class="row align-items-center">
         <div class="col-lg-2 col-md-3 col-6">
-            <a href="./" class="brand-wrap">
-                <img class="logo" src="{% static './images/logos.png' %}">
+            <a href="#" class="brand-wrap">
+                <img class="logo" src="{% static 'cPrivateChef.jpeg' %}">
             </a> <!-- brand-wrap.// -->
         </div>
         <div class="col-lg col-sm col-md col-6 flex-grow-0">
@@ -39,7 +39,7 @@
                 </button>
                 <div class="dropdown-menu">
                     {% for type in categories %}
-                    <a class="dropdown-item" href="#">{{ type.category_name }}  </a>
+                    <a class="dropdown-item" href="{{type.getProductCategory}}">{{ type.category_name }}  </a>
                     {% endfor %}
                     
                 </div>
@@ -47,9 +47,14 @@
         </div> <!-- col.// -->
         <a href="./store.html" class="btn btn-outline-primary">Store</a>
         <div class="col-lg  col-md-6 col-sm-12 col">
-            <form action="#" class="search">
+            <!-- store is the name specified in urls as app_name, add thie to avoid error  "Reverse for '' not found. '' is not a valid view function or pattern name."
+            get from : https://www.tutorialguruji.com/python/django-reverse-for-index-not-found-index-is-not-a-valid-view-function-or-pattern-name/-->
+            <form class="searched" method="POST" action="{% url 'store:searchResult' %}">
+                
+                {% csrf_token %}
+
                 <div class="input-group w-100">
-                    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+                    <input type="text" class="form-control" name="searched" style="width:60%;" placeholder="Search Product">
                     
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="submit">

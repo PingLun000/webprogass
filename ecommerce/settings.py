@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # once defined in templates, can simply call it directly from any pages
                 'store.views.categories',
+                
             ],
         },
     },

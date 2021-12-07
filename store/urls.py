@@ -9,13 +9,14 @@ app_name='store'
 
 urlpatterns=[
     
-      path('view/',views.storeProducts, name='storeProducts'),
       path('',views.storeProducts, name='storeProducts'),
+       
       #<slug refers to datatype want to store and pass :
       # /item/chef-weslen/
-      path('item/<slug:slug>/',views.productDetail, name='productDetail'),
-      #/private-chef/ category
-      path('<slug:category_slug>/',views.main, name='products_by_category'),
-    
+      path('product/<slug:slug>/',views.productDetail, name='productDetail'),
+     
+      path('category/<slug:category_slug>/',views.productCategory, name='productCategory'),
+      
+      path('search/', views.searchResult, name='searchResult')
     
 ]

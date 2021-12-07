@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
+
 # Create your models here.
 
 class Category(models.Model):
@@ -16,12 +19,18 @@ class Category(models.Model):
         #change the name in admin page because itj ust simply add s behind category
         verbose_name_plural='categories'
         
+    def getProductCategory(self):
+            #the store is the app name defined in urls, detail is the name given in path
+        # refer back to the unique items as slug
+        # this line is use to reverse the specific link back 
+        return reverse('store:productCategory',args=[self.slug])   
+        
     def __str__(self):
         return self.category_name
     
 
 # Create your models here.
-class Product(models.Model):
+class Product(models.Model): 
     #used as a FK to retrieve data from Category Table
     category_name=models.ForeignKey(Category,related_name='product',on_delete=models.CASCADE)  
     #pre-defined by django in line 3, for User 
@@ -41,6 +50,12 @@ class Product(models.Model):
     class Meta:
         #-created's -means ordering by the last added items asc/desc
         ordering=('-created',)
-        
+    
+    def getProductDetail(self):
+        #the store is the app name defined in urls, detail is the name given in path
+        # refer back to the unique items as slug
+        # this line is use to reverse the specific link back 
+        return reverse('store:productDetail',args=[self.slug])   
+     
     def __str__(self):
         return self.title 
