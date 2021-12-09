@@ -26,8 +26,8 @@ def productCategory(request,category_slug):
 def searchResult(request):
     if request.method=="POST":
         # retrieve it from front-end and pass it to .html
-        searched=request.POST['searched']
-        items=Product.objects.filter(title__contains=searched)
-        return render(request,'searchResult.html',{'searched':searched,'items':items})
+        find=request.POST['find']
+        items=Product.objects.filter(title__contains=find,is_active=True,in_stock=True)
+        return render(request,'searchResult.html',{'searched':find,'items':items})
     else:
         return render(request,'searchResult.html',{})
