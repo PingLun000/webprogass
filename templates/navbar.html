@@ -68,11 +68,14 @@
         <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                     <div class="d-flex justify-content-end mb-3 mb-lg-0">
                         <div class="widget-header">
-                            <small class="title text-muted">Welcome guest!</small>
-                            <div> 
+                            <small class="title text-muted">Welcome !</small>
+                            <div>  
+                              {% if request.user.is_anonymous %}  
                                 <!--login is the defaul name-->
-                                <a href="{% url 'members:login' %}">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="{% url 'members:register' %}"> Register</a>
+                                <a href="{% url 'members:login' %}">Sign in</a>  
+                              {% elif request.user.is_authenticated %}  
+                                <a href="{% url 'members:logout' %}"> logout</a>
+                              {% endif%} 
                             </div>
                         </div>
                         <a href="./cart.html" class="widget-header pl-3 ml-3">

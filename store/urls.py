@@ -11,7 +11,7 @@ urlpatterns=[
     
       path('',views.storeProducts, name='storeProducts'),
        
-      #<slug refers to datatype want to store and pass :
+      #<slug refers to datatype want to stored and pass :
       # /item/chef-weslen/
       path('product/<slug:slug>/',views.productDetail, name='productDetail'),
      

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'templates',
     'members',
     'crispy_forms',
+     
     #register.apps.MainConfig,
 ]
 

@@ -2,12 +2,28 @@
  
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout 
+from django.contrib.auth import authenticate,login,logout as logOut
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .registrationform import registerationForm
+
  
 # Create your views here.
+
+'''def login(request):
+    if request.method=='POST':
+        membersForm=registerationForm(data=request.POST)
+        if membersForm.is_valid():
+            member=membersForm.get_user()
+            logins(request,member)
+        return redirect("/home")    
+    else:
+        membersForm=registerationForm()
+            
+    return render(request,"registration/login.html",{'membersForm':membersForm})
+
+
+'''
 
 '''def signIn(request):
     if request.method=="POST":
@@ -61,4 +77,7 @@ def register(response):
  
 
 
-
+def logout(request):
+    if request.method=='POST':
+        logOut(request)
+        return redirect('members/login')
