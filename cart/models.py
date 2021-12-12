@@ -4,20 +4,37 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import BooleanField, FloatField
 from django.db.models.fields.related import ForeignKey
 
-from .models import members,Product
+from store.models import Product
  
 
 # Create your models here.
 
-class Cart(models.Model):
+'''class Order(models.Model):
     member=Model.ForeignKey(members,on_delete=models.CASCADE)
     Order_product=models.BooleanField(default=False)
     total_price=models.FloatField(default=0)
     
-class CartItem(models.Model):
+    def __str__(self):
+        return self.cart_ID'''
+    
+class Cart(models.Model):
+    cart_ID=models.CharField(max_length=255,blank=True)
+    date_added=models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.cart_ID
+    
+class CartProduct(models.Model):
     cart=models.ForeignKey(Cart,on_delete=models.CASCADE)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
-    price=models.FloatField(default=0)
-    total_items=models.IntegerField(default=0)
-    quantiy=models.IntegerField(default=1)
+    quantiy=models.IntegerField()
     created=models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.product
+    
+    def total_price(self):
+        return self.quantiy*self.product.price 
+    
+     
+     

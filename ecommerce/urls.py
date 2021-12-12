@@ -23,10 +23,10 @@ from members import views
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/',include('store.urls',namespace='sotre')),
     path('',include('store.urls',namespace='sotre')),
-    
+    path('home/',include('store.urls',namespace='sotre')),
     path('members/',include('members.urls',namespace='members')),
+    path('cart/',include('cart.urls',namespace='cart')),
     #path('register/',views.register, name='register'),
     
    

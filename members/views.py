@@ -1,8 +1,9 @@
  
  
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout as logOut
+from django.http import request
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .registrationform import registerationForm
@@ -40,13 +41,14 @@ from .registrationform import registerationForm
     return render(request,'authentication/signIn.html',context)     
     
     '''
+    
 '''def signIn(request):
     if request.method=='POST':
         email=request.POST.get('email')
         password=request.POST.get('password')
 
         try:
-            user=User.object.get(email=email)
+            user=User.object.get(email=email,password=password)
         except:
             # used to show error message while email!=email https://docs.djangoproject.com/en/3.2/ref/contrib/messages/
             messages.error(request, 'Member doesn\'t exsit ')
@@ -63,21 +65,27 @@ from .registrationform import registerationForm
     context={}
     return render(request,'authentication/signIn.html',context)'''
     
-def register(response):
-    if response.method=="POST":
+def register(request):
+    if request.method=='POST':
         #check this
-        membersForm=registerationForm(response.POST)
+        membersForm=registerationForm(request.POST)
         if membersForm.is_valid():
-            membersForm.save()
-        return redirect("/home")    
+            member=membersForm.save()
+            username=membersForm.cleaned_data.get('username')
+            signup_user=User.objects.get(username=username)
+            membersGroup=Group.objects.get(name='membersGroup')
+            membersGroup.user_set.add(signup_user)
+            login(request,member) 
+
+        return redirect('store:storeProducts')    
     else:
         membersForm=registerationForm()
             
-    return render(response,"registration/register.html",{'membersForm':membersForm})
+    return render(request,"registration/register.html",{'membersForm':membersForm})
  
 
 
 def logout(request):
     if request.method=='POST':
         logOut(request)
-        return redirect('members/login')
+        return redirect('/login')

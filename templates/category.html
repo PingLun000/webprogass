@@ -7,14 +7,11 @@
 {% block content %}
 
  
-<!-- ========================= SECTION MAIN ========================= -->
-<!-- ========================= SECTION MAIN ========================= -->
+ <!-- ========================= SECTION MAIN ========================= -->
 <section class="section-intro padding-y-sm">
 <div class="container">
 
-<div class="intro-banner-wrap">
-	<img src="images/banners/1.jpg" class="img-fluid rounded">
-</div>
+
 
 </div> <!-- container //  -->
 </section>
@@ -24,11 +21,13 @@
 <section class="section-name padding-y-sm">
 <div class="container">
 
-<header class="section-heading">
-	<a href="./store.html" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
+ 
+<header class="border-bottom mb-4 pb-3">
+    <div class="form-inline">
+        <span class="mr-md-auto">{{products.count}} Items Found </span>
+        
+    </div>
 </header><!-- sect-heading -->
-
 	
 <div class="row">
     {% for product in products %}
@@ -39,6 +38,16 @@
                     <figcaption class="info-wrap">
                         <a href="{{product.getProductDetail}}" class="title">{{product.title}}</a>
                         <div class="price mt-1">RM{{product.price}}</div> <!-- price-wrap.// -->
+
+                        <div class="rating-star">
+							<span>
+								<i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+								<i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+								</span>
+						</div>
                     </figcaption>
                 
             </div>  
@@ -51,3 +60,10 @@
 </section>
     <!-- ========================= SECTION  END// ========================= -->
 {%endblock%}    
+ 
+
+ 
+
+    
+    
+     

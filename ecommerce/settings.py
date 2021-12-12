@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'templates',
     'members',
     'crispy_forms',
-     
+    'cart',
     #register.apps.MainConfig,
 ]
 
@@ -71,6 +71,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # once defined in templates, can simply call it directly from any pages
                 'store.views.categories',
+                # since wish to show the number of products in navbar
+                'cart.counter.count',
                 
             ],
         },
@@ -127,14 +129,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 # for the main project(webprogassignment) to refers to the static folder
 #STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-#!!!Please check here after adding these two sroot&sdirs add run command as p m.py collectstatic
+#Check here after adding these two sroot&sdirs add run command as p m.py collectstatic
 
-STATIC_ROOT=BASE_DIR/'static'
-STATICFILES_DIRS=['ecommerceweb/static',]
+#STATIC_ROOT=BASE_DIR/'static'
+#STATICFILES_DIRS=['/static',]
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
+    'ecommerce/static',
+]
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR/'media'
@@ -144,6 +151,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/'
+
 
 
 # Default primary key field type

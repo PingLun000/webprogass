@@ -21,7 +21,7 @@ class Category(models.Model):
         
     def getProductCategory(self):
             #the store is the app name defined in urls, detail is the name given in path
-        # refer back to the unique items as slug
+        # refer back to the unique items as slug example private-chef-wan
         # this line is use to reverse the specific link back 
         return reverse('store:productCategory',args=[self.slug])   
         
@@ -42,6 +42,7 @@ class Product(models.Model):
     image=models.ImageField(upload_to='image/products')
     slug=models.SlugField(max_length=255)
     price=models.DecimalField(max_digits=8,decimal_places=2)
+    discount=models.DecimalField(max_digits=8,decimal_places=2,default=0)
     in_stock=models.BooleanField(default=True)
     is_active=models.BooleanField(default=True)
     updated =models.DateTimeField(auto_now=True)

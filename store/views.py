@@ -1,7 +1,10 @@
  
+from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render
-from .models import Product,Category
 
+from cart.models import CartProduct
+from .models import Product,Category
+from cart.views import cartID
 # Create your views here.
 
 def categories(request):
@@ -15,8 +18,15 @@ def storeProducts(request):
     return render(request,'home.html',{'products':products})
 
 def productDetail(request,slug):
-    product=get_object_or_404(Product,slug=slug,in_stock=True)
-    return render(request,'productDetail.html',{'product':product})
+    product=get_object_or_404(Product,slug=slug)
+    #card__  used to access the attribute of fk linked, from cart
+    #productExisted=CartProduct.objects.filter(cart__cart_ID=cartID(request),product=product).exists()
+    
+    context={
+        'product':product,
+        #'productExisted':productExisted
+    }
+    return render(request,'productDetail.html',context)
 
 def productCategory(request,category_slug):
     category=get_object_or_404(Category,slug=category_slug)
